@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
+  <g transform="translate(256,256)">
+    <path d="M0-256L-70.4-211.2L-45.6-140.8L-115.2-96L-45.6-51.2L-70.4-19.2L0 25.6L70.4-19.2L45.6-51.2L115.2-96L45.6-140.8L70.4-211.2L0-256z"/>
+    <circle r="180" fill="none" stroke="currentColor" stroke-width="24"/>
+    <circle r="140" fill="none" stroke="currentColor" stroke-width="24"/>
+    <circle r="100" fill="none" stroke="currentColor" stroke-width="24"/>
+    <path d="M-160 0L-140 60L-80 80L-60 120L0 140L60 120L80 80L140 60L160 0L140-60L80-80L60-120L0-140L-60-120L-80-80L-140-60L-160 0z" fill="none" stroke="currentColor" stroke-width="16"/>
+  </g>
+  <text x="256" y="340" font-size="48" font-family="monospace" text-anchor="middle" font-weight="bold">R</text>
+</svg>

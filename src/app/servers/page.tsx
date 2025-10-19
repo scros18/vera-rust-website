@@ -3,15 +3,6 @@
 export default function ServersPage() {
   const servers = [
     {
-      name: 'Vera Vanilla NA East',
-      region: 'North America East',
-      players: '145/200',
-      map: 'Procedural 4000',
-      wipe: 'Weekly Thursday',
-      status: 'online',
-      features: ['Pure Vanilla', '2018-2019 Features', 'Active Admins'],
-    },
-    {
       name: 'Vera Vanilla EU West',
       region: 'Europe West',
       players: '178/200',
@@ -20,30 +11,38 @@ export default function ServersPage() {
       status: 'online',
       features: ['Pure Vanilla', '2018-2019 Features', 'Low Ping'],
     },
-    {
-      name: 'Vera Vanilla NA West',
-      region: 'North America West',
-      players: '132/200',
-      map: 'Procedural 3500',
-      wipe: 'Bi-Weekly',
-      status: 'online',
-      features: ['Pure Vanilla', 'PvP Focused', 'Fair Play'],
-    },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 py-20 px-4">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold text-center mb-4 bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
-          Vera Rust Servers
-        </h1>
-        <p className="text-center text-gray-400 mb-12 text-lg">
-          100% Vanilla • 2018-2019 Experience • No Mods
-        </p>
+    <div className="relative min-h-screen bg-black">
+      {/* Background Image */}
+      <div 
+        className="fixed inset-0 z-0"
+        style={{
+          backgroundImage: 'url(/site-bg.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black"></div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 py-20">
+        <div className="text-center mb-16">
+          <div className="inline-block px-8 py-4 backdrop-blur-md bg-black/40 rounded-2xl border border-white/10 mb-4">
+            <h1 className="text-4xl md:text-5xl font-display font-bold rust-text glow-orange">
+              Vera Rust Servers
+            </h1>
+          </div>
+          <p className="text-gray-300 text-lg">
+            100% Vanilla • 2018-2019 Experience • No Mods
+          </p>
+        </div>
 
         {/* Server Optimizations Info */}
-        <div className="bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-500/30 rounded-xl p-6 mb-12">
-          <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+        <div className="backdrop-blur-md bg-black/30 border border-white/10 rounded-2xl p-8 mb-12">
+          <h2 className="text-2xl font-display font-bold text-white mb-6 flex items-center gap-2">
             <span className="text-2xl">⚡</span>
             Our Server Optimizations
           </h2>
@@ -112,7 +111,7 @@ export default function ServersPage() {
           {servers.map((server, index) => (
             <div
               key={index}
-              className="bg-gray-800 rounded-xl border border-gray-700 hover:border-orange-500 transition-all p-6"
+              className="backdrop-blur-md bg-black/40 rounded-xl border border-white/10 hover:border-orange-500 transition-all p-6 shadow-xl"
             >
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div className="flex-1">
@@ -140,10 +139,10 @@ export default function ServersPage() {
                   </div>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <button className="px-6 py-3 bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-lg font-semibold transition-all whitespace-nowrap">
+                  <button className="px-6 py-3 bg-gradient-to-r from-orange-600 to-red-600 hover:scale-105 text-white rounded-lg font-semibold transition-all whitespace-nowrap shadow-lg">
                     Connect Now
                   </button>
-                  <button className="px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg font-medium transition-all whitespace-nowrap">
+                  <button className="px-6 py-3 backdrop-blur-sm bg-white/10 hover:bg-white/20 border border-white/10 text-white rounded-lg font-medium transition-all whitespace-nowrap">
                     View Details
                   </button>
                 </div>
@@ -154,10 +153,10 @@ export default function ServersPage() {
 
         {/* Additional Info */}
         <div className="mt-12 text-center">
-          <p className="text-gray-400 mb-4">
+          <p className="text-gray-300 mb-4">
             All servers feature authentic 2018-2019 Rust gameplay with zero modifications
           </p>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-gray-400">
             Need help connecting? Check our Discord for connection guides and server info
           </p>
         </div>

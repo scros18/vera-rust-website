@@ -3,23 +3,6 @@ export default function Home() {
     <div className="min-h-screen bg-black">
       {/* Hero Section with Background Image */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Subtle grid pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
-            backgroundSize: '50px 50px'
-          }}></div>
-        </div>
-
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <div className="inline-block px-8 py-4 backdrop-blur-sm bg-white/5 rounded-xl border border-white/10 mb-2">
-              <h2 className="text-3xl md:text-4xl font-display font-bold tracking-wider text-white">
-                Premium Infrastructure
-              </h2>
-            </div>
-            <p className="text-gray-400 mt-4">Optimized for the best vanilla Rust experience</p>
-          </div>
         {/* Background Image */}
         <div 
           className="absolute inset-0 z-0"
@@ -56,30 +39,20 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Description Card */}
-            <div className="inline-block">
-              <div className="px-5 py-2 backdrop-blur-sm bg-black/20 rounded-lg border border-white/5">
-                <p className="text-sm md:text-base text-gray-400 font-light">
-                  No mods • No plugins • Just the original Rust experience you remember
-                </p>
+            {/* Credits Section */}
+            <div className="mt-16 flex flex-col items-center space-y-4">
+              <div className="flex items-center gap-6">
+                <div className="group flex items-center gap-2 px-5 py-2.5 backdrop-blur-sm bg-white/5 rounded-lg border border-white/5 hover:border-white/10 transition-all">
+                  <img src="/steam.webp" alt="Steam" className="w-6 h-6 object-contain opacity-70 group-hover:opacity-100 transition-opacity" />
+                  <span className="text-xs font-medium text-gray-400 group-hover:text-gray-300 transition-colors tracking-wide">STEAM</span>
+                </div>
+                <div className="group flex items-center gap-2 px-5 py-2.5 backdrop-blur-sm bg-white/5 rounded-lg border border-white/5 hover:border-blue-500/20 transition-all">
+                  <svg className="w-6 h-6 text-gray-400 group-hover:text-blue-400 transition-colors" viewBox="0 0 88 88" fill="currentColor">
+                    <path d="M0 12.402l35.687-4.86.016 34.423-35.67.203zm35.67 33.529l.028 34.453L.028 75.48.026 45.7zm4.326-39.025L87.314 0v41.527l-47.318.376zm47.329 39.349l-.011 41.34-47.318-6.678-.066-34.739z"/>
+                  </svg>
+                  <span className="text-xs font-medium text-gray-400 group-hover:text-blue-400 transition-colors tracking-wide">WINDOWS</span>
+                </div>
               </div>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
-              <a
-                href="/register"
-                className="group relative px-8 py-4 overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-600 rounded-lg"></div>
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <span className="relative font-semibold text-lg tracking-wide">JOIN NOW</span>
-              </a>
-              <a
-                href="/servers"
-                className="group px-8 py-4 glass hover:bg-white/10 rounded-lg font-semibold text-lg tracking-wide transition-all border border-white/10"
-              >
-                BROWSE SERVERS
-              </a>
             </div>
           </div>
         </div>
@@ -89,7 +62,7 @@ export default function Home() {
       </section>
 
       {/* Features Section - Clean separation */}
-      <section className="relative py-24 px-4 bg-black">
+      <section className="relative py-24 px-4 bg-black overflow-hidden">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
@@ -97,6 +70,10 @@ export default function Home() {
             backgroundSize: '40px 40px'
           }}></div>
         </div>
+
+        {/* Softened decorative glow elements - positioned away from edges */}
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-orange-600/5 rounded-full blur-[150px] -translate-y-1/2 -translate-x-1/2"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-red-600/5 rounded-full blur-[150px] translate-y-1/2 translate-x-1/2"></div>
         
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
@@ -126,7 +103,7 @@ export default function Home() {
             ].map((feature, i) => (
               <div
                 key={i}
-                className="group glass-dark hover:glass p-8 rounded-xl transition-all hover:scale-105 hover:shadow-2xl hover:shadow-orange-600/20"
+                className="group glass-dark hover:glass p-8 rounded-xl transition-all hover:scale-105 hover:shadow-2xl hover:shadow-orange-600/20 text-center md:text-left"
               >
                 <div className="text-5xl mb-4">{feature.icon}</div>
                 <h3 className="text-xl font-display font-bold mb-3 tracking-wide group-hover:text-orange-400 transition-colors">
@@ -140,8 +117,21 @@ export default function Home() {
       </section>
 
       {/* Server Optimizations Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
+      <section className="relative py-20 px-4 overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-950 to-black"></div>
+        <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-orange-600/3 rounded-full blur-[140px] -translate-y-1/2 -translate-x-1/4"></div>
+        <div className="absolute top-1/3 right-1/4 w-[600px] h-[600px] bg-red-600/3 rounded-full blur-[140px] -translate-y-1/3 translate-x-1/4"></div>
+        
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 opacity-[0.02]">
+          <div className="absolute inset-0" style={{
+            backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+            backgroundSize: '60px 60px'
+          }}></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 tracking-wider">
               <span className="rust-text">Premium Infrastructure</span>
@@ -178,9 +168,21 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="relative py-20 px-4 bg-black">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8">
+      <section className="relative py-32 px-4 bg-black overflow-hidden">
+        {/* Softened decorative glow elements - positioned away from edges */}
+        <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-orange-600/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
+        <div className="absolute bottom-1/4 left-1/4 w-[600px] h-[600px] bg-red-600/5 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2"></div>
+        
+        {/* Subtle pattern */}
+        <div className="absolute inset-0 opacity-[0.03]">
+          <div className="absolute inset-0" style={{
+            backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(255,140,0,0.3) 1px, transparent 1px)',
+            backgroundSize: '30px 30px'
+          }}></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid md:grid-cols-4 gap-8 px-4">
             {[
               { value: '5+', label: 'Active Servers' },
               { value: '1000+', label: 'Players' },
@@ -189,12 +191,12 @@ export default function Home() {
             ].map((stat, i) => (
               <div
                 key={i}
-                className="glass-dark p-8 rounded-xl text-center hover:glass transition-all group"
+                className="glass-dark p-10 rounded-xl text-center hover:glass transition-all group"
               >
-                <div className="text-5xl font-display font-black rust-text mb-2 group-hover:glow-orange transition-all">
+                <div className="text-5xl md:text-6xl font-display font-black rust-text mb-3 group-hover:glow-orange transition-all leading-tight">
                   {stat.value}
                 </div>
-                <div className="text-gray-400 font-light tracking-wide">{stat.label}</div>
+                <div className="text-gray-400 font-light tracking-wide text-base">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -227,14 +229,14 @@ export default function Home() {
           <div className="flex flex-col items-center space-y-6">
             <div className="inline-block">
               <div className="px-10 py-6 backdrop-blur-md bg-black/40 rounded-2xl border border-white/10 shadow-2xl">
-                <h2 className="text-4xl md:text-5xl font-display font-bold tracking-wider">
+                <h2 className="text-4xl md:text-5xl font-display font-bold tracking-wider text-center">
                   <span className="rust-text glow-orange">Ready to Play?</span>
                 </h2>
               </div>
             </div>
             <div className="inline-block">
               <div className="px-8 py-3 backdrop-blur-sm bg-black/30 rounded-xl border border-white/5">
-                <p className="text-lg md:text-xl text-gray-300 font-light">
+                <p className="text-lg md:text-xl text-gray-300 font-light text-center">
                   Join thousands returning to authentic Rust
                 </p>
               </div>
