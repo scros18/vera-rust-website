@@ -24,8 +24,15 @@ export default function ProfilePage() {
 
   if (loading || !user) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
-        <div className="text-white">Loading...</div>
+      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center relative overflow-hidden">
+        {/* Background Image with Blur */}
+        <div className="absolute inset-0 z-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-20"
+            style={{ backgroundImage: 'url(/site-bg-2.jpg)', filter: 'blur(8px)' }}
+          />
+        </div>
+        <div className="text-white relative z-10">Loading...</div>
       </div>
     );
   }
@@ -62,8 +69,16 @@ export default function ProfilePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] pt-24 pb-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#0a0a0a] pt-24 pb-16 relative overflow-hidden">
+      {/* Background Image with Blur */}
+      <div className="absolute inset-0 z-0">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-20"
+          style={{ backgroundImage: 'url(/site-bg-2.jpg)', filter: 'blur(8px)' }}
+        />
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Profile Header */}
         <div className="bg-[#131313] border border-[#1f1f1f] rounded-lg p-8 mb-6">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-6">

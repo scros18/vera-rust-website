@@ -29,8 +29,16 @@ export default function AdminPanel() {
 
   if (loading || !user || !isAdmin) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] pt-20 flex items-center justify-center">
-        <div className="flex flex-col items-center space-y-4">
+      <div className="min-h-screen bg-[#0a0a0a] pt-20 flex items-center justify-center relative overflow-hidden">
+        {/* Background Image with Blur */}
+        <div className="absolute inset-0 z-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-20"
+            style={{ backgroundImage: 'url(/site-bg.jpg)', filter: 'blur(8px)' }}
+          />
+        </div>
+        
+        <div className="flex flex-col items-center space-y-4 relative z-10">
           <div className="relative w-16 h-16">
             <div className="absolute inset-0 border-4 border-orange-500/20 rounded-lg"></div>
             <div className="absolute inset-0 border-4 border-t-orange-500 border-r-transparent border-b-transparent border-l-transparent rounded-lg animate-spin"></div>
@@ -71,8 +79,16 @@ export default function AdminPanel() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] pt-20 pb-12">
-      <div className="max-w-[1920px] mx-auto px-4 lg:px-8">
+    <div className="min-h-screen bg-[#0a0a0a] pt-20 pb-12 relative overflow-hidden">
+      {/* Background Image with Blur */}
+      <div className="absolute inset-0 z-0">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-20"
+          style={{ backgroundImage: 'url(/site-bg.jpg)', filter: 'blur(8px)' }}
+        />
+      </div>
+      
+      <div className="max-w-[1920px] mx-auto px-4 lg:px-8 relative z-10">
         {/* Header */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-2">
