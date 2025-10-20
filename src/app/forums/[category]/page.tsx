@@ -207,11 +207,11 @@ export default function CategoryPage({ params }: PageProps) {
       </div>
 
       {/* Hero Section */}
-      <div className="relative z-10 pt-24 pb-24 bg-gradient-to-b from-black via-black/95 to-black/50">
+  <div className="relative z-10 pt-16 pb-12 bg-gradient-to-b from-black via-black/95 to-black/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-6 mb-8">
+          <div className="flex items-center gap-4 mb-6">
             <div 
-              className="w-20 h-20 md:w-24 md:h-24 rounded-lg flex items-center justify-center text-4xl md:text-5xl shadow-lg flex-shrink-0"
+              className="w-16 h-16 md:w-20 md:h-20 rounded-lg flex items-center justify-center text-3xl md:text-4xl shadow-md flex-shrink-0"
               style={{ 
                 backgroundColor: `${data.color}20`, 
                 border: `2px solid ${data.color}60`,
@@ -221,10 +221,10 @@ export default function CategoryPage({ params }: PageProps) {
               {data.icon}
             </div>
             <div>
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white uppercase tracking-wider mb-2" style={{ letterSpacing: '0.08em' }}>
+              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white uppercase tracking-wider mb-1" style={{ letterSpacing: '0.06em' }}>
                 {data.name}
               </h1>
-              <p className="text-gray-400 text-sm md:text-base">
+              <p className="text-gray-400 text-xs md:text-sm">
                 {data.description}
               </p>
             </div>
@@ -431,8 +431,8 @@ export default function CategoryPage({ params }: PageProps) {
 
         {/* Posts List */}
         <div className="bg-[#0f0f0f] border border-[#1f1f1f] rounded-lg overflow-hidden">
-          <div className="bg-[#0a0a0a] border-b border-[#1f1f1f] px-6 py-4">
-            <h3 className="font-display font-bold text-white uppercase tracking-wide">
+          <div className="bg-[#0a0a0a] border-b border-[#1f1f1f] px-4 py-3">
+            <h3 className="font-display font-bold text-white uppercase tracking-wide text-sm">
               Recent Posts ({posts.length})
             </h3>
           </div>
@@ -447,14 +447,14 @@ export default function CategoryPage({ params }: PageProps) {
                 <Link
                   key={post.id}
                   href={`/forums/${category}/${post.id}`}
-                  className="block px-6 py-4 hover:bg-[#131313] transition-colors"
+                  className="block px-4 py-3 hover:bg-[#131313] transition-colors"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
-                      <h4 className="font-display font-semibold text-white mb-1 hover:text-orange-400 transition-colors">
+                      <h4 className="font-display font-semibold text-white mb-1 hover:text-orange-400 transition-colors text-sm md:text-base">
                         {post.title}
                       </h4>
-                      <div className="flex items-center gap-3 text-xs text-gray-500">
+                      <div className="flex items-center gap-2 text-xs text-gray-500">
                         <span>by <span className="text-gray-400">{post.author.displayName || post.author}</span></span>
                         <span>•</span>
                         <span>{new Date(post.createdAt).toLocaleDateString()}</span>
@@ -464,12 +464,12 @@ export default function CategoryPage({ params }: PageProps) {
                           post.status === 'resolved' ? 'bg-blue-500/20 text-blue-400' :
                           post.status === 'rejected' ? 'bg-red-500/20 text-red-400' :
                           'bg-yellow-500/20 text-yellow-400'
-                        }`}>
+                        } text-[10px]`}> 
                           {post.status}
                         </span>
                       </div>
                     </div>
-                    <div className="flex items-center gap-6 text-sm text-gray-500">
+                    <div className="flex items-center gap-4 text-sm text-gray-500">
                       <div className="text-center">
                         <div className="font-display font-semibold text-gray-400">{post.replies}</div>
                         <div className="text-xs">replies</div>

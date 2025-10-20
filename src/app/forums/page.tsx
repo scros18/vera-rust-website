@@ -89,20 +89,20 @@ export default function ForumsPage() {
           </div>
 
       {/* Hero Section */}
-      <div className="relative z-10 pt-24 pb-24 bg-gradient-to-b from-black via-black/95 to-black/50">
+  <div className="relative z-10 pt-16 pb-12 bg-gradient-to-b from-black via-black/95 to-black/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Title Box */}
-          <div className="max-w-2xl mx-auto text-center mb-8">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg mb-6 shadow-2xl shadow-orange-500/30 transition-transform hover:scale-105 duration-300">
+          <div className="max-w-2xl mx-auto text-center mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg mb-4 shadow-lg shadow-orange-500/20 transition-transform hover:scale-102 duration-200">
               <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                 <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/>
                 <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"/>
               </svg>
             </div>
-            <h1 itemProp="headline" className="text-5xl md:text-6xl lg:text-7xl font-bold text-orange-500 mb-4 uppercase tracking-wider animate-fade-in-up" style={{ letterSpacing: '0.1em' }}>
+            <h1 itemProp="headline" className="text-4xl md:text-5xl lg:text-6xl font-bold text-orange-500 mb-2 uppercase tracking-wider animate-fade-in-up" style={{ letterSpacing: '0.08em' }}>
               FORUMS
             </h1>
-            <p itemProp="description" className="text-gray-400 text-sm md:text-base uppercase tracking-widest font-semibold">
+            <p itemProp="description" className="text-gray-400 text-xs md:text-sm uppercase tracking-wide font-medium">
               Join the discussion on our forums!
             </p>
           </div>
