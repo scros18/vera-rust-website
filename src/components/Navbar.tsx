@@ -13,6 +13,7 @@ export default function Navbar() {
   const navigationLinks = [
     { href: '/', label: 'Home', icon: '🏠' },
     { href: '/servers', label: 'Servers', icon: '🖥️' },
+    { href: '/forums', label: 'Forums', icon: '💬' },
     { href: '/leaderboard', label: 'Leaderboard', icon: '🏆' },
     { href: '/legacy', label: 'Legacy', icon: '⚡' },
   ];

@@ -18,7 +18,11 @@ const orbitron = Orbitron({
 });
 
 export const metadata: Metadata = {
-  title: "Vera Rust Servers | EU Vanilla 2018-2019 Experience | Best Rust Server Europe",
+  metadataBase: new URL('https://verarust.com'),
+  title: {
+    default: "Vera Rust Servers | EU Vanilla 2018-2019 Experience | Best Rust Server Europe",
+    template: "%s | Vera Rust Servers",
+  },
   description: "Join Vera - Europe's premier vanilla Rust server with authentic 2018-2019 gameplay. No mods, no plugins, pure legacy Rust experience. EU West hosted, 60+ tick rate, DDoS protected. Weekly wipes, active community, fair play guaranteed.",
   keywords: [
     "rust server",
@@ -63,17 +67,16 @@ export const metadata: Metadata = {
     "rust fair play",
     "rust anti cheat",
   ],
-  authors: [{ name: "Vera Rust Servers" }],
+  authors: [{ name: "Vera Rust Servers", url: "https://verarust.com" }],
   creator: "Vera Rust Servers",
   publisher: "Vera Rust Servers",
-  metadataBase: new URL('https://verarust.co.uk'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: "Vera Rust Servers | EU Vanilla 2018-2019 Experience",
     description: "Europe's premier vanilla Rust server with authentic 2018-2019 gameplay. Pure legacy experience, no mods, 60+ tick rate, weekly wipes. Join now!",
-    url: 'https://verarust.co.uk',
+    url: 'https://verarust.com',
     siteName: 'Vera Rust Servers',
     locale: 'en_EU',
     type: 'website',

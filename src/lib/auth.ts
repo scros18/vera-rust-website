@@ -6,6 +6,7 @@ export interface User {
   displayName: string;
   avatar?: string;
   bio?: string;
+  role: 'user' | 'staff' | 'admin';
   level: number;
   xp: number;
   joinedDate: string;
@@ -74,6 +75,7 @@ export const register = (
     username,
     email,
     displayName,
+    role: 'user',
     level: 1,
     xp: 0,
     joinedDate: new Date().toISOString(),
@@ -108,6 +110,7 @@ export const login = (
       username: 'admin@system.local',
       email: 'admin@system.local',
       displayName: 'System Admin',
+      role: 'admin',
       level: 99,
       xp: 999999,
       joinedDate: '2018-01-01T00:00:00.000Z',

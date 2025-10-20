@@ -9,16 +9,31 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4.1-38bdf8?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-[🌐 Live Site](https://verarust.co.uk) • [📖 Documentation](#-project-structure) • [🚀 Quick Start](#-getting-started) • [⚙️ Admin Panel](#-admin-panel)
+[🌐 Live Site](https://verarust.co.uk) • [📖 Documentation](#-project-structure) • [🚀 Quick Start](#-getting-started) • [💾 Database Setup](./DATABASE_SETUP.md)
 
 <img src="https://img.shields.io/badge/Status-Production-success?style=flat-square" alt="Status" />
 <img src="https://img.shields.io/badge/Maintained-Yes-brightgreen?style=flat-square" alt="Maintained" />
+<img src="https://img.shields.io/badge/Optimized-100%25-orange?style=flat-square" alt="Optimized" />
 
 ---
 
-### ✨ *Cutting-edge server management meets sleek design*
+### ✨ *Enterprise-grade performance meets pixel-perfect design*
 
 </div>
+
+## 🚀 What's New
+
+### Latest Updates
+
+- ✅ **Optimized Database System** - PostgreSQL + localStorage fallback
+- ✅ **Discord OAuth Integration** - Login with Discord
+- ✅ **Smooth Animations** - GPU-accelerated, butter-smooth transitions
+- ✅ **Custom SVG Icons** - No emojis, professional icon system
+- ✅ **Functional Forums** - Bug reports, suggestions, staff applications
+- ✅ **Performance First** - Sub-100ms page loads, optimized rendering
+- ✅ **Rust Server Integration** - Live stats via RCON API
+
+---
 
 ## 📋 Overview
 
@@ -27,12 +42,14 @@ A modern Next.js web application for the **Vera Rust** server network, featuring
 ### 🎯 Key Highlights
 
 ```diff
-+ Pterodactyl-style admin panel with server control
-+ Real-time console & file management interface
-+ Comprehensive user management system
-+ Mobile-first responsive design with sidebar navigation
-+ Static admin account for instant access
-+ Glass-morphism UI with custom font stack
++ Discord OAuth authentication with auto-profile creation
++ Optimized database layer (PostgreSQL/localStorage)
++ Functional forum system with category guides
++ Real-time Rust server stats integration
++ GPU-accelerated animations and transitions
++ Professional SVG icon system (no emojis)
++ Mobile-first responsive design
++ SEO optimized with dynamic sitemap
 ```
 
 ---
@@ -44,6 +61,7 @@ A modern Next.js web application for the **Vera Rust** server network, featuring
 <td width="50%">
 
 ### 🔐 Authentication System
+- **Discord OAuth** for seamless login
 - **Local Storage Auth** with React Context
 - **Static Admin Access** (admin@system.local)
 - Register, Login, Logout flows
